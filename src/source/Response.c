@@ -417,7 +417,7 @@ STATUS curlCompleteSync(PCurlResponse pCurlResponse)
         DLOGE("[%s] curl perform failed for url %s with result %s: %s", pCurlResponse->pCurlRequest->streamName, url, curl_easy_strerror(result),
               pCurlResponse->callInfo.errorBuffer);
         
-        pCurlResponse->endOfStream = TRUE
+        pCurlResponse->endOfStream = TRUE;
         pCurlResponse->callInfo.callResult = getServiceCallResultFromCurlStatus(result);
     } else {
         // get the response code and note the request completion time

@@ -414,9 +414,10 @@ STATUS curlCompleteSync(PCurlResponse pCurlResponse)
         pCurlResponse->callInfo.callResult = SERVICE_CALL_REQUEST_TIMEOUT;
     } else if (result != CURLE_OK) {
         curl_easy_getinfo(pCurlResponse->pCurl, CURLINFO_EFFECTIVE_URL, &url);
-        DLOGW("[%s] curl perform failed for url %s with result %s: %s", pCurlResponse->pCurlRequest->streamName, url, curl_easy_strerror(result),
+        DLOGE("[%s] curl perform failed for url %s with result %s: %s", pCurlResponse->pCurlRequest->streamName, url, curl_easy_strerror(result),
               pCurlResponse->callInfo.errorBuffer);
-
+        
+        pCurlResponse->endOfStream = TRUE
         pCurlResponse->callInfo.callResult = getServiceCallResultFromCurlStatus(result);
     } else {
         // get the response code and note the request completion time
